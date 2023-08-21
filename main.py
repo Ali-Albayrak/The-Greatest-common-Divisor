@@ -13,7 +13,11 @@ def gcd_numbers(numbers: list[int])->int:
     """
     if len(numbers) < 2:
         raise ValueError("At least two numbers are required to calculate GCD")
-    result = gcd_two_numbers(numbers[0], numbers[1])
+    
+    result = numbers[0]
+    for num in numbers[1:]:
+        result = gcd_two_numbers(result, num)
+    
     return result
 
 def get_numbers()->list[int]:
@@ -34,9 +38,10 @@ def get_numbers()->list[int]:
 
 def main():
     numbers = get_numbers()
+    print(f"your input: {numbers}")
     try:
         result = gcd_numbers(numbers)
-        print(result)
+        print(f"The Greatest Common Divisor of {numbers} is: {result}")
     except ValueError as e:
         print(f"Value Error: {e}.")
     
