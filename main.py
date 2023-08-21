@@ -2,14 +2,19 @@ def gcd_two_numbers(a: int, b: int)->int:
     """
     Calculate GCD of two positive integers using the Euclidean Algorithm.
     """
-    pass
+    while b:
+        a, b = b, a % b
+    return a
 
 def gcd_numbers(numbers: list[int])->int:
     """
     Calculate GCD of a list of positive integers.
     Uses the gcd_two_numbers function.
     """
-    pass
+    if len(numbers) < 2:
+        raise ValueError("At least two numbers are required to calculate GCD")
+    result = gcd_two_numbers(numbers[0], numbers[1])
+    return result
 
 def get_numbers()->list[int]:
     """
@@ -29,7 +34,12 @@ def get_numbers()->list[int]:
 
 def main():
     numbers = get_numbers()
-    print("your input list: ",numbers)
+    try:
+        result = gcd_numbers(numbers)
+        print(result)
+    except ValueError as e:
+        print(f"Value Error: {e}.")
+    
 
 if __name__ == "__main__":
     main()
